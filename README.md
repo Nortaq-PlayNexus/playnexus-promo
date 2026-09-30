@@ -57,25 +57,59 @@ python -m playnexus doctor
 
 # 2. Generate a week of content from your service catalog
 python -m playnexus plan --days 7
+python -m playnexus compile
 
 # 3. Inspect the queue (approval-gated items are listed separately)
 python -m playnexus queue
-python -m playnexus show 12
+python -m playnexus queue --blocked      # config/hook misconfigurations
+python -m playnexus show 12 --manual     # + live subreddit rules for Reddit
 
-# 4. Publish only what is due and only in `auto` mode
+# 4. Publish only what is due, and only what is authorised
 python -m playnexus run
+python -m playnexus run --dry-run
 
-# 5. Approve community posts one at a time (optional web UI instead)
+# 5. Approve community posts, one at a time (or use the web UI)
 python -m playnexus approve 12
 python -m playnexus reject 13 --reason "too salesy for r/webdev"
-python -m playnexus review          # http://127.0.0.1:8777
+python -m playnexus review               # http://127.0.0.1:8777
 ```
 
-Windows Task Scheduler, every 15 min:
+Other commands:
 
 ```powershell
-python -m playnexus run
+python -m playnexus ratelimit            # per-channel quota + next legal slot
+python -m playnexus stats                # what's published, blocked, failed
+python -m playnexus retry                # recover skipped/failed posts
+python -m playnexus done 12 --url "..."  # record a post you submitted by hand
+python -m playnexus secret reddit client_id=xxx password=yyy
+python -m playnexus hn                   # your HN history + score, read-only
+python -m playnexus gh topics            # sync GitHub repo topics
+python -m playnexus gh readme            # generate the profile README
 ```
+
+Unattended, every 15 minutes:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\schedule.ps1 -Install
+```
+
+`run` is safe to schedule: it only publishes `auto`-mode channels, only inside their
+configured hours, and only within their daily cap. Community channels are never
+touched without your approval.
+
+---
+
+## Two things the tests caught, worth knowing
+
+**Approved ≠ auto.** An `approve`-mode channel still publishes itself once a human
+approves the post. Approval is *authorisation*, not a delivery mechanism — otherwise
+Reddit would require you to open a browser and copy-paste every time you approved
+something, which is how approval queues get abandoned.
+
+**The UTM link is longer than the plain one.** If you truncate a post to the platform
+limit and then append a tracked URL, you blow the limit. The pipeline resolves the
+tracked link *before* rendering and reserves its length (`render.fit_with_link`).
+`tests/test_publish.py` asserts the Mastodon payload stays within 500 chars.
 
 ---
 
@@ -115,16 +149,33 @@ playnexus/
   cli.py          argparse entry point
   config.py       load + validate business/channels/hooks/secrets
   db.py           SQLite: queue, events, sliding-window counters
-  models.py       Post, Content, ChannelRules
-  content.py      service catalog -> content items
+  models.py       Post, Content, ChannelRules, Channel, Mode, State
+  content.py      service catalog + hooks -> dated content items
   render.py       content item -> per-channel payload
   compliance.py   the gate
-  ratelimit.py    sliding window + token bucket
-  scheduler.py    active hours, quiet days, daily caps, min gap
+  ratelimit.py    daily cap + min gap, DB-backed
+  scheduler.py    active hours, weekdays, min gap, daily cap
   http.py         urllib client: retry, backoff, header rate-limit parsing
-  pipeline.py     plan / compile / run orchestration
-  metrics.py      UTM links + result reporting
-  channels/       one module per platform
-config/           business, channels, hooks, rules
-data/             SQLite db (gitignored)
+  pipeline.py     compile / run / approve / reject / retry
+  metrics.py      UTM links
+  stats.py        performance report
+  review.py       local approval web UI (stdlib http.server)
+  scaffold.py     config templates written by `init`
+  channels/       one module per platform + _registry.py
+config/           business, channels, hooks, secrets (gitignored)
+data/             SQLite db + run.log (gitignored)
+tests/            test_publish.py — end-to-end against a mock server
+schedule.ps1      Task Scheduler install/status/uninstall
 ```
+
+## Tests
+
+```powershell
+python -m tests.test_publish
+```
+
+Spins up a mock Mastodon, compiles content, publishes through the real adapter, and
+asserts: bearer auth, `Idempotency-Key`, length cap respected, rate limit counted,
+server `X-Ratelimit-*` parsed, UTM present in the wire payload, spam copy blocked,
+HN ad-tone blocked, a channel without `rules` refused at load, credentials absent
+from the database, and an unapproved community post never published.
