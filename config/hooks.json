@@ -1,0 +1,66 @@
+{
+  "_readme": "One hook = one idea, written once and rendered ~10 ways. `id` must be unique. `community` targets a specific subreddit/tag.",
+  "hooks": [
+    {
+      "id": "dc-bot-scope-creep",
+      "service": "discord-bots",
+      "angle": "why-your-discord-bot-needs-a-scope-document",
+      "title": "Your Discord bot will need a scope document before it needs a database",
+      "body": "The most common way a Discord bot project dies is not a bad idea, it's an unbounded one. The bot needs a role, which needs a database, which needs a migration story, which needs someone to own it. Four weeks of scope negotiation that nobody wrote down.\n\nSo before writing a line of code I write a one-page answer to four questions: which guild can run this with the permissions the bot actually requests; what happens when the bot is offline for an hour; who deletes the data and when; what the bot does that a human admin would object to. If any of those four is unanswerable, the project is not scoped yet, and the right move is to say so before taking money.\n\nThe scope document is also the only reliable way to stop a project growing sideways. Every 'while you're in there' request gets checked against it, and either it fits or it becomes phase two.",
+      "proof": "",
+      "cta": "If you're starting a Discord bot, send me the idea and I'll tell you which of those four questions you haven't answered yet.",
+      "tags": [
+        "discord",
+        "discordbot",
+        "webdev",
+        "programming"
+      ],
+      "community": "Discord_Bots"
+    },
+    {
+      "id": "exe-not-a-tutorial",
+      "service": "exe-tools",
+      "angle": "shipping-a-tool-not-a-tutorial",
+      "title": "A script you have to install Python to run is not a finished tool",
+      "body": "The gap between 'it works on my machine' and 'here, double-click it' is where most internal tools die.\n\nShipping a Windows executable means: bundling the interpreter and every dependency, handling missing VC++ runtimes, failing with a readable message instead of a traceback, writing to a config file the user can actually find, and having a version number somewhere visible. None of that is the interesting part of the work and all of it is the part that decides whether anyone outside your machine can use the thing.\n\nThe other half is not quietly ignoring the warnings. An unsigned EXE triggering SmartScreen looks exactly like malware, so the fix is code signing, a real icon, an About dialog with a publisher name, and shipping through a known channel so the first-run reputation check has something to work with.",
+      "proof": "",
+      "cta": "If you have a script that only you can run, that's a solvable problem, not a lost cause.",
+      "tags": [
+        "python",
+        "windows",
+        "programming",
+        "tooling"
+      ]
+    },
+    {
+      "id": "game-prototype-first",
+      "service": "games",
+      "angle": "prototype-a-mechanic-before-a-game",
+      "title": "Prototype the one mechanic, not the game",
+      "body": "The cheapest way to find out whether a game idea works is to build the single mechanic it depends on and nothing else. No menus, no art pipeline, no save system, no progression.\n\nIf the loop isn't fun with a grey box and one sound effect, adding content will not save it, and you'll have spent your time finding out. If it is fun, you now know what to build, which is a completely different and much better position to be in.\n\nThis works for Roblox and Unity identically: script the core verb, wire one input to one output, put a counter on screen so you can feel the feedback loop, and play it twenty times.",
+      "proof": "",
+      "cta": "",
+      "tags": [
+        "gamedev",
+        "gamedesign",
+        "indiedev",
+        "roblox"
+      ]
+    },
+    {
+      "id": "app-one-job",
+      "service": "apps-web",
+      "angle": "shrink-the-scope-until-it-is-obvious",
+      "title": "The best small apps do one job and refuse to do a second",
+      "body": "A request for 'an app to manage our inventory, invoices, staff schedule and customer emails' is four projects that will all be mediocre. Splitting it into the one that has a daily user — usually inventory — and deferring the rest produces something people open every morning instead of a thing they log into once and abandon.\n\nThe practical version: pick the one screen someone needs on a Tuesday morning, build only that, and make the data model tolerant of the other three arriving later. Same database, incremental shipping, no rewrite in six months.\n\nThe discipline that makes this work is writing down what the app will not do, and treating that list as binding.",
+      "proof": "",
+      "cta": "",
+      "tags": [
+        "webdev",
+        "programming",
+        "softwarearchitecture",
+        "buildinpublic"
+      ]
+    }
+  ]
+}

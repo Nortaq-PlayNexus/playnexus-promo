@@ -1,0 +1,110 @@
+{
+  "name": "PlayNexus",
+  "tagline": "I build the thing you keep putting off.",
+  "url": "https://playnexus.dev",
+  "contact": "hello@playnexus.dev",
+  "discord_invite": "",
+  "timezone": "America/New_York",
+  "tone": "direct, technical, specific numbers over adjectives. never hype.",
+  "rules_note": "A service shop survives on repeat clients and referrals, not on reach. Every post should be something you would post if nobody paid you.",
+  "utm_source": "playnexus",
+  "utm_medium": "promo",
+  "languages": [
+    "en"
+  ],
+  "forbidden_words": [
+    "amazing",
+    "stunning",
+    "revolutionary",
+    "game-changer",
+    "world-class",
+    "seamless",
+    "cutting-edge",
+    "leverage",
+    "synergy",
+    "passionate",
+    "dedicated",
+    "one-stop",
+    "bespoke",
+    "best-in-class"
+  ],
+  "hashtags": [
+    "buildinpublic",
+    "indiedev",
+    "discordbot"
+  ],
+  "services": [
+    {
+      "slug": "discord-bots",
+      "name": "Discord bots",
+      "tagline": "Bots that do the boring part of running your server.",
+      "detail": "Custom commands, moderation, ticketing, economy and role systems, music, onboarding, analytics dashboards. Deployed on your own host or mine, with source handed over.",
+      "keywords": [
+        "discord",
+        "bot",
+        "moderation",
+        "automation",
+        "ticket"
+      ],
+      "page": "/discord-bots",
+      "proof": "",
+      "cta": "Describe the command set you want and I'll tell you what's feasible.",
+      "est_value": "from $150",
+      "audience": "server owners tired of doing it by hand"
+    },
+    {
+      "slug": "exe-tools",
+      "name": "Windows EXE tools",
+      "tagline": "Double-clickable tools, signed, no Python install needed.",
+      "detail": "Batch utilities, GUI front-ends for scripts, file and media processors, internal tools for teams who don't write code. PyInstaller or native, with a proper icon and a changelog.",
+      "keywords": [
+        "windows",
+        "exe",
+        "pyinstaller",
+        "automation",
+        "tooling"
+      ],
+      "page": "/exe-tools",
+      "proof": "",
+      "cta": "Send me the manual process you do by hand; I'll automate it.",
+      "est_value": "from $120",
+      "audience": "people who need a tool, not a tutorial"
+    },
+    {
+      "slug": "apps-web",
+      "name": "Web & desktop apps",
+      "tagline": "Small apps that do one job properly.",
+      "detail": "Dashboards, internal CRUD, booking and scheduling, data entry, browser extensions, Electron/Tauri wrappers. Shipped with a build you can run yourself.",
+      "keywords": [
+        "app",
+        "webapp",
+        "electron",
+        "tauri",
+        "dashboard"
+      ],
+      "page": "/apps",
+      "proof": "",
+      "cta": "",
+      "est_value": "quote in 24h",
+      "audience": ""
+    },
+    {
+      "slug": "games",
+      "name": "Games",
+      "tagline": "Small games, and the tools that make them.",
+      "detail": "Roblox and Unity projects, game-jam entries, prototypes that prove a mechanic works before you commit to it.",
+      "keywords": [
+        "game",
+        "roblox",
+        "unity",
+        "gamedev",
+        "robloxstudio"
+      ],
+      "page": "/games",
+      "proof": "",
+      "cta": "",
+      "est_value": "",
+      "audience": ""
+    }
+  ]
+}

@@ -1,0 +1,603 @@
+{
+  "_readme": "mode: auto   = you own the surface, safe to publish unattended\nmode: approve= community, requires a human for every single post\nrate_per_day is a ceiling the pipeline will never exceed, not a target.\nEvery block MUST have a `rules` object; the pipeline refuses to start a channel without one.",
+  "channels": {
+    "discord": {
+      "enabled": true,
+      "mode": "auto",
+      "rate_per_day": 3,
+      "min_gap_minutes": 240,
+      "active_hours": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weight": 3,
+      "notes": "Your own server. Webhook only, no bot token needed.",
+      "webhook_url": {
+        "secret": true,
+        "hint": "Server Settings > Integrations > Webhooks"
+      },
+      "username_override": "",
+      "rules": {
+        "max_title": 256,
+        "max_body": 4096,
+        "min_body": 0,
+        "max_tags": 0,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [
+          "\\bping\\b",
+          "@everyone",
+          "@here"
+        ],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "bluesky": {
+      "enabled": true,
+      "mode": "auto",
+      "rate_per_day": 4,
+      "min_gap_minutes": 180,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weight": 3,
+      "notes": "Free AT Protocol API. Best permission-free reach per unit of effort.",
+      "max_chars": 300,
+      "identifier": {
+        "secret": true,
+        "hint": "your handle, e.g. you.bsky.social"
+      },
+      "app_password": {
+        "secret": true,
+        "hint": "Settings > App Passwords"
+      },
+      "bearer": {
+        "secret": true,
+        "hint": "optional JWT from com.atproto.server.createSession"
+      },
+      "service_url": {
+        "secret": true,
+        "hint": "https://bsky.social"
+      },
+      "repo": {
+        "secret": true,
+        "hint": "did:plc:... ; derived from handle if blank"
+      },
+      "rules": {
+        "max_title": 80,
+        "max_body": 300,
+        "min_body": 0,
+        "max_tags": 2,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [
+          "\\b(we|i|our|my)\\b[^.!?]{0,40}\\b(cheap(est)?|guarantee[ds]?)\\b"
+        ],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "mastodon": {
+      "enabled": true,
+      "mode": "auto",
+      "rate_per_day": 3,
+      "min_gap_minutes": 240,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weight": 2,
+      "notes": "Any instance. Idempotency-Key set so retries cannot double-post.",
+      "max_chars": 500,
+      "visibility": "public",
+      "allow_sensitive": false,
+      "instance": {
+        "secret": true,
+        "hint": "https://mastodon.social"
+      },
+      "access_token": {
+        "secret": true,
+        "hint": "Settings > Development > Access token"
+      },
+      "rules": {
+        "max_title": 80,
+        "max_body": 500,
+        "min_body": 0,
+        "max_tags": 3,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [
+          "\\bcheap\\b"
+        ],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "telegram": {
+      "enabled": false,
+      "mode": "auto",
+      "rate_per_day": 2,
+      "min_gap_minutes": 480,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weight": 2,
+      "notes": "Cheapest newsletter available. Use a bot token, never a userbot.",
+      "parse_mode": "Markdown",
+      "preview": true,
+      "silent": true,
+      "bot_token": {
+        "secret": true,
+        "hint": "@BotFather"
+      },
+      "chat_id": {
+        "secret": true,
+        "hint": "@channelname or -100..."
+      },
+      "rules": {
+        "max_title": 100,
+        "max_body": 4096,
+        "min_body": 0,
+        "max_tags": 0,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "devto": {
+      "enabled": true,
+      "mode": "auto",
+      "rate_per_day": 1,
+      "min_gap_minutes": 1440,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "weight": 2,
+      "notes": "30 req/30s, 1000 articles total. Genuinely compounding SEO.",
+      "endpoint": "https://dev.to/api/articles",
+      "published": true,
+      "organization": "",
+      "api_key": {
+        "secret": true,
+        "hint": "dev.to > Settings > API keys"
+      },
+      "rules": {
+        "max_title": 128,
+        "max_body": 100000,
+        "min_body": 400,
+        "max_tags": 4,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [
+          "\\bcheck out my\\b",
+          "\\bbuy\\b"
+        ],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "hashnode": {
+      "enabled": false,
+      "mode": "approve",
+      "rate_per_day": 1,
+      "min_gap_minutes": 1440,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "weight": 1,
+      "notes": "Lower traffic than dev.to. Worth a human read before publishing.",
+      "endpoint": "https://gql.hashnode.com/",
+      "cover_image": "",
+      "api_key": {
+        "secret": true,
+        "hint": "Hashnode > Settings > Developer"
+      },
+      "bearer": {
+        "secret": true,
+        "hint": "optional"
+      },
+      "publication_id": {
+        "secret": true,
+        "hint": "Settings > Publications"
+      },
+      "rules": {
+        "max_title": 100,
+        "max_body": 50000,
+        "min_body": 400,
+        "max_tags": 5,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "github": {
+      "enabled": true,
+      "mode": "approve",
+      "rate_per_day": 2,
+      "min_gap_minutes": 1440,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "weight": 1,
+      "notes": "Topics are the useful part: they are how people search 'discord bot developer'. `pnx gh topics` / `pnx gh readme`.",
+      "repo": "playnexus/portfolio",
+      "topics": [
+        "discord-bot",
+        "discord-bot-development",
+        "python",
+        "exe-tools",
+        "game-development",
+        "hired",
+        "freelance"
+      ],
+      "token": {
+        "secret": true,
+        "hint": "Settings > Developer settings > PAT"
+      },
+      "username": {
+        "secret": true,
+        "hint": "your github username"
+      },
+      "rules": {
+        "max_title": 120,
+        "max_body": 60000,
+        "min_body": 0,
+        "max_tags": 0,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    },
+    "reddit": {
+      "enabled": true,
+      "mode": "approve",
+      "rate_per_day": 1,
+      "min_gap_minutes": 720,
+      "active_hours": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "weight": 4,
+      "notes": "100 QPM per OAuth client (10-min average), verified. The API is not the limit - each sub's self-promo rule is. READ IT: `pnx show <id> --manual` fetches the live rules. 9:1 value ratio is common; several subs ban promotion outright.",
+      "user_agent": "linux:playnexus.promo:1.0.0 (by /u/REPLACE_ME)",
+      "api_base": "https://oauth.reddit.com",
+      "web_base": "https://www.reddit.com",
+      "client_id": {
+        "secret": true,
+        "hint": "Reddit > Preferences > Apps > script"
+      },
+      "client_secret": {
+        "secret": true
+      },
+      "username": {
+        "secret": true
+      },
+      "password": {
+        "secret": true
+      },
+      "subreddit": {
+        "secret": true,
+        "hint": "default target; hook.community overrides"
+      },
+      "rules": {
+        "max_title": 300,
+        "max_body": 12000,
+        "min_body": 400,
+        "max_tags": 0,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [
+          "\\bdiscount\\b",
+          "\\bfree quote\\b",
+          "\\b(we|i|our|my)\\b[^.!?]{0,40}\\b(cheap(est)?|lowest[- ]priced)\\b",
+          "\\bupvote\\b",
+          "\\bclick here\\b",
+          "\\bcheck (out|it) out\\b",
+          "\\bsign ?up\\b",
+          "\\blimited time\\b"
+        ],
+        "required": [],
+        "min_value_ratio": 0.55,
+        "no_ad_tone": false,
+        "link_in_profile_only": false,
+        "community": true
+      }
+    },
+    "hackernews": {
+      "enabled": true,
+      "mode": "approve",
+      "rate_per_day": 1,
+      "min_gap_minutes": 10080,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "weekdays": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "weight": 1,
+      "notes": "Public API is read-only (verified: no rate limit, no submit endpoint). Submission is a web form. Show HN guidance: drop all marketing and sales language. This is a credibility channel, not a volume channel.",
+      "hn_username": {
+        "secret": true
+      },
+      "rules": {
+        "max_title": 80,
+        "max_body": 5000,
+        "min_body": 300,
+        "max_tags": 0,
+        "link_allowed": true,
+        "link_required": true,
+        "banned": [
+          "\\b(hire|contact|call to action|sign ?up|order now|get a quote)\\b",
+          "\\b(we|our) (are|is) (a )?(reliable|trusted|professional|expert)\\b",
+          "\\b(affordable|cheap|cheapest) (rates|prices|pricing)\\b",
+          "\\bmy clients?\\b",
+          "\\byour business\\b",
+          "\\bwe build\\b"
+        ],
+        "required": [],
+        "min_value_ratio": 0.7,
+        "no_ad_tone": true,
+        "link_in_profile_only": false,
+        "community": true
+      }
+    },
+    "lobsters": {
+      "enabled": false,
+      "mode": "approve",
+      "rate_per_day": 1,
+      "min_gap_minutes": 4320,
+      "active_hours": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "weekdays": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "weight": 1,
+      "notes": "Invite-gated. Tolerant of a technical write-up about your own work.",
+      "rules": {
+        "max_title": 100,
+        "max_body": 5000,
+        "min_body": 300,
+        "max_tags": 0,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [
+          "\\b(hire|contact|services)\\b"
+        ],
+        "required": [],
+        "min_value_ratio": 0.65,
+        "no_ad_tone": true,
+        "link_in_profile_only": false,
+        "community": true
+      }
+    },
+    "manual": {
+      "enabled": true,
+      "mode": "approve",
+      "rate_per_day": 2,
+      "min_gap_minutes": 1440,
+      "active_hours": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "weekdays": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "weight": 1,
+      "notes": "Directory and launch-site form filler: Product Hunt, BetaList, Fazier, DevHunt, Uneed, top.gg, Disboard, itch.io, Fiverr, Freelancer, Indie Hackers. `pnx show <id> --manual` lists what is still unsubmitted.",
+      "rules": {
+        "max_title": 80,
+        "max_body": 4000,
+        "min_body": 0,
+        "max_tags": 8,
+        "link_allowed": true,
+        "link_required": false,
+        "banned": [],
+        "required": [],
+        "min_value_ratio": 0.0,
+        "no_ad_tone": false,
+        "link_in_profile_only": false
+      }
+    }
+  }
+}

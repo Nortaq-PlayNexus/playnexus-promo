@@ -1,0 +1,9 @@
+config/secrets.json
+data/
+out/
+__pycache__/
+*.pyc
+*.db
+*.db-wal
+*.db-shm
+schedule-task.xml
